@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 public class divide_and_conquer {
 
 
