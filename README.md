@@ -4,7 +4,7 @@ This repo contains solutions to a 4-part algorithm assignment focused on:
 
 1. **Asymptotic Analysis**  
    - Prove: `f(n) + g(n) ∈ Θ(max{f(n), g(n)})`  
-   - Solve recurrence: `T(n) = T(n/3) + T(n/3) + 1 → O(log n)`
+   - Solve recurrence: `T(n) = T(n/2) + T(n/4) + 1 → O( n)`
 
 2. **Peak Finding in Bitonic Array**  
    - Find the max in a array in `O(log n)` using binary search-based algorithm
