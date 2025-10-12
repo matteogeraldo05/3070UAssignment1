@@ -9,8 +9,9 @@ public class heap {
         size = 0;
     }
 
-    private int left(int i) { return 2 * i + 1; }
-    private int right(int i) { return 2 * i + 2; }
+    private int parent(int i){return (i - 1) / 2;}
+    private int left(int i){return 2 * i + 1;}
+    private int right(int i){return 2 * i + 2;}
 
     public void insert(int value) {
         if (size == capacity) throw new IllegalStateException("Heap is full");
@@ -18,10 +19,6 @@ public class heap {
         size++;
     }
 
-    public int getMin() {
-        if (size == 0) throw new IllegalStateException("Heap is empty");
-        return heap[0];
-    }
 
     public void printAsArray() {
         System.out.print("[");
@@ -46,6 +43,20 @@ public class heap {
         System.out.println(heap[index]); // parent
 
         printAsTreeHelper(2 * index + 1, level + 1); // left child
+    }
+
+    public void maxHeapInsert(int value) {
+        if (size == capacity) throw new IllegalStateException("Heap is full");
+        size++;
+        heap[size - 1] = value;
+        int i = size - 1;
+
+        while (i > 0 && heap[parent(i)] < heap[i]) {
+            int temp = heap[i];
+            heap[i] = heap[parent(i)];
+            heap[parent(i)] = temp;
+            i = parent(i);
+        }
     }
 
     public void maxHeapify(int index){
@@ -91,29 +102,41 @@ public class heap {
         return maxVal;
     }
 
+    public void heapSort() {
+        buildMaxHeap();
+        int originalSize = size;
+        for (int i = size - 1; i > 0; i--) {
+            int temp = heap[0];
+            heap[0] = heap[i];
+            heap[i] = temp;
+            size--;
+            maxHeapify(0);
+        }
+        size = originalSize;
+    }
+
     public static void main(String[] args) {
+    // Create a heap with enough capacity
+        heap h = new heap(10);
 
-        heap h = new heap(13);
-
-        h.insert(16);
-        h.insert(14);
-        h.insert(10);
-        h.insert(8);
-        h.insert(7);
-        h.insert(3);
+        // Insert arbitrary elements (unsorted)
         h.insert(9);
-        h.insert(1);
         h.insert(4);
+        h.insert(7);
+        h.insert(1);
+        h.insert(3);
+        h.insert(6);
+        h.insert(8);
         h.insert(2);
 
+        System.out.println("Before HeapSort:");
         h.printAsArray();
 
-        h.buildMaxHeap();
+        // Perform heap sort
+        h.heapSort();
 
-        h.printAsTree();
-        h.heapExtractMax();
-
+        System.out.println("After HeapSort:");
         h.printAsArray();
-        h.printAsTree();
     }
+
 }
