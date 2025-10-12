@@ -116,27 +116,84 @@ public class heap {
     }
 
     public static void main(String[] args) {
-    // Create a heap with enough capacity
-        heap h = new heap(10);
+        System.out.println("===== ASSIGNMENT 1 - HEAP TEST CASES =====\n");
 
-        // Insert arbitrary elements (unsorted)
-        h.insert(9);
-        h.insert(4);
-        h.insert(7);
-        h.insert(1);
-        h.insert(3);
-        h.insert(6);
-        h.insert(8);
-        h.insert(2);
+        // -------------------------------------------------------------------
+        // CASE 1: BUILD-MAX-HEAP
+        System.out.println("CASE 1: BUILD-MAX-HEAP");
+        heap h1 = new heap(10);
+        int[] arr1 = {3, 16, 2, 10, 14, 7, 9, 1, 4, 8};
+        for (int val : arr1) h1.insert(val);
 
-        System.out.println("Before HeapSort:");
-        h.printAsArray();
+        System.out.println("Before buildMaxHeap:");
+        h1.printAsArray();
 
-        // Perform heap sort
-        h.heapSort();
+        h1.buildMaxHeap();
+        System.out.println("After buildMaxHeap:");
+        h1.printAsArray();
+        h1.printAsTree();
+        System.out.println();
 
-        System.out.println("After HeapSort:");
-        h.printAsArray();
+        // -------------------------------------------------------------------
+        // CASE 2: MAX-HEAPIFY
+        System.out.println("CASE 2: MAX-HEAPIFY");
+        heap h2 = new heap(6);
+        int[] arr2 = {16, 14, 10, 8, 7, 3};
+        for (int val : arr2) h2.insert(val);
+        h2.heap[1] = 5; // deliberately break heap property at index 1
+        System.out.println("Before maxHeapify (violation at index 1):");
+        h2.printAsArray();
+        h2.maxHeapify(1);
+        System.out.println("After maxHeapify:");
+        h2.printAsArray();
+        System.out.println();
+
+        // -------------------------------------------------------------------
+        // CASE 3: HEAP-MAXIMUM
+        System.out.println("CASE 3: HEAP-MAXIMUM");
+        System.out.println("Maximum value in heap h1: " + h1.heapMaximum());
+        System.out.println();
+
+        // -------------------------------------------------------------------
+        // CASE 4: HEAP-EXTRACT-MAX
+        System.out.println("CASE 4: HEAP-EXTRACT-MAX");
+        System.out.println("Before extractMax:");
+        h1.printAsArray();
+        int max = h1.heapExtractMax();
+        System.out.println("Extracted max = " + max);
+        System.out.println("After extractMax:");
+        h1.printAsArray();
+        h1.printAsTree();
+        System.out.println();
+
+        // -------------------------------------------------------------------
+        // CASE 5: MAX-HEAP-INSERT
+        System.out.println("CASE 5: MAX-HEAP-INSERT");
+        heap h3 = new heap(10);
+        int[] arr3 = {10, 7, 8, 3, 2};
+        for (int val : arr3) h3.maxHeapInsert(val);
+        System.out.println("After inserting {10,7,8,3,2} into heap:");
+        h3.printAsArray();
+        h3.printAsTree();
+        System.out.println("Now inserting 15...");
+        h3.maxHeapInsert(15);
+        h3.printAsArray();
+        h3.printAsTree();
+        System.out.println();
+
+        // -------------------------------------------------------------------
+        // CASE 6: HEAPSORT
+        System.out.println("CASE 6: HEAPSORT");
+        heap h4 = new heap(8);
+        int[] arr4 = {9, 4, 7, 1, 3, 6, 8, 2};
+        for (int val : arr4) h4.insert(val);
+
+        System.out.println("Before sorting:");
+        h4.printAsArray();
+        h4.heapSort();
+        System.out.println("After heapSort:");
+        h4.printAsArray();
+
+        System.out.println("\n===== END OF TESTS =====");
     }
-
 }
