@@ -1,8 +1,4 @@
 public class divide_and_conquer {
-
-
-
-
     static int dominant(int[] list, int start, int end){
 
         if (start == end) {return list[start];}
@@ -14,21 +10,26 @@ public class divide_and_conquer {
 
         int leftcount = 0;
         for (int i = start; i <= end; i++){
-            if (list[i] == leftside){leftcount++;}
+            if (list[i] == leftside){
+                leftcount++;
+            }
         }
 
         int rightcount = 0;
         for (int i = start; i <= end; i++){
-            if (list[i] == rightside){rightcount++;}
+            if (list[i] == rightside){
+                rightcount++;
+            }
         }
 
-        if (leftcount > (end - start + 1) / 2) {return leftside;}
-        if (rightcount > (end - start + 1) / 2) {return rightside;}
+        if (leftcount > (end - start + 1) / 2) {
+            return leftside;
+        } else if (rightcount > (end - start + 1) / 2) {
+            return rightside;
+        }
 
         return -1;
     }    
-
-
 
 
     public static void main(String[] args) {
